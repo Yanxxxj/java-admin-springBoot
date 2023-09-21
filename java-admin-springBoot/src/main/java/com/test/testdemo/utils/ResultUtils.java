@@ -1,5 +1,9 @@
 package com.test.testdemo.utils;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 
@@ -9,6 +13,9 @@ import java.io.Serializable;
  * @author tq
  * @date 2023-09-20
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ResultUtils implements Serializable {
     //响应码
     private Integer code;
@@ -17,11 +24,6 @@ public class ResultUtils implements Serializable {
     //返回数据
     private Object data;
 
-    public ResultUtils(Integer code, String message, Object data) {
-        this.code = code;
-        this.message = message;
-        this.data = data;
-    }
 
     public Integer getCode() {
         return code;

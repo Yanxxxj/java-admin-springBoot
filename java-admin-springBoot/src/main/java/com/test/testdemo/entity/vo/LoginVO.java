@@ -1,6 +1,7 @@
 package com.test.testdemo.entity.vo;
 
 import com.test.testdemo.entity.User;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -11,11 +12,15 @@ import java.io.Serializable;
  * @author tq
  * @date 2023-09-20
  */
+@Data
 public class LoginVO implements Serializable {
     private Integer id;
     private String token;
+
+    private String avatar;
     private User user;
 
+    private String[] roles;
     public Integer getId() {
         return id;
     }

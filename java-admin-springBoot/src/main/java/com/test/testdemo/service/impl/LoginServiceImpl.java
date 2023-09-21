@@ -44,6 +44,8 @@ public class LoginServiceImpl implements ILoginService {
             //使用jwt的情况下，会生成一个jwt token,jwt token里会包含用户的信息
             loginVO.setToken(UUID.randomUUID().toString());
             loginVO.setUser(user);
+            loginVO.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80");
+            loginVO.setRoles(new String[]{"admin"});
             return new ResultUtils(20000, "登录成功", loginVO);
         }
         return new ResultUtils(401, "登录失败", "");

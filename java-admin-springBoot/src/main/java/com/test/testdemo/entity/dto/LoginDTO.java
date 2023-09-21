@@ -1,13 +1,18 @@
 package com.test.testdemo.entity.dto;
 
 
+import lombok.Data;
+
+import java.io.Serializable;
+
 /**
  * 前端请求参数
  *
  * @author tq
  * @date 2023-09-20
  */
-public class LoginDTO {
+@Data
+public class LoginDTO implements Serializable {
     private String userName;
     private String passWord;
 
