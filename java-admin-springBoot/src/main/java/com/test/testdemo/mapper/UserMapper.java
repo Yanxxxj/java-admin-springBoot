@@ -31,20 +31,20 @@ public interface UserMapper {
     public int insertUser(User user);
 
     /**
+     * 查询用户详情
+     *
+     * @param id 用户主键
+     * @return 用户信息
+     */
+    public User selectUserById(Long id);
+
+    /**
      * 修改用户
      *
      * @param user 修改
      * @return 结果
      */
     public int updateUser(User user);
-
-    /**
-     * 删除用户
-     *
-     * @param id 用户主键
-     * @return 结果
-     */
-    public int deleteUserById(Long id);
 
     /**
      * 批量删除
@@ -57,6 +57,7 @@ public interface UserMapper {
 
     /**
      * 通过登录名查询用户
+     *
      * @param userName 用户名
      * @return 用户信息
      */

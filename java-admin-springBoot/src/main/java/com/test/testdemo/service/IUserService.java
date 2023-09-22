@@ -1,6 +1,6 @@
 package com.test.testdemo.service;
 
-import java.util.List;
+import java.util.Map;
 
 import com.test.testdemo.entity.User;
 
@@ -17,7 +17,7 @@ public interface IUserService {
      * @param user 用户
      * @return 集合
      */
-    public List<User> selectUserList(User user);
+    public Map<String, Object> selectUserList(Integer page, Integer size, User user);
 
     /**
      * 新增用户
@@ -26,6 +26,14 @@ public interface IUserService {
      * @return 结果
      */
     public int insertUser(User user);
+
+    /**
+     * 查询用户详情
+     *
+     * @param id 用户信息主键
+     * @return 用户
+     */
+    public User selectUserById(Long id);
 
     /**
      * 修改用户
@@ -42,12 +50,4 @@ public interface IUserService {
      * @return 结果
      */
     public int deleteUserByIds(Long[] ids);
-
-    /**
-     * 删除用户信息
-     *
-     * @param id 用户主键
-     * @return 结果
-     */
-    public int deleteUserById(Long id);
 }

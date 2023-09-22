@@ -2,8 +2,11 @@ package com.test.testdemo.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.testdemo.utils.HttpContextUtils;
+import com.test.testdemo.utils.RedisUtils;
 import com.test.testdemo.utils.ResultUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,21 +19,30 @@ import java.io.IOException;
  * @author tq
  * @date 2023-09-20
  */
+@Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
+
+    @Autowired
+    private RedisUtils redisUtils;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 
         //从header中获取token
-        String token = request.getHeader("token");
+        String token = request.getHeader("X-Token");
         //如果token为空
         if (Strings.isBlank(token)) {
             setReturn(response, 400, "用户未登录，请先登录");
+            // 检查token是否已经过期
+            String x_token = redisUtils.getCacheObject("token");
+            log.info("用户token是{}", x_token);
+            if (Strings.isNotBlank(x_token)) {
+                return true;
+            }else {
+                setReturn(response, 400, "用户信息已过期，请重新登录");
+            }
             return false;
         }
-        //在实际使用中还会:
-        // 1、校验token是否能够解密出用户信息来获取访问者
-        // 2、token是否已经过期
-
         return true;
     }
 

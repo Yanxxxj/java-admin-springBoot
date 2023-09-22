@@ -1,21 +1,16 @@
 package com.test.testdemo.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import com.test.testdemo.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.test.testdemo.entity.User;
 import com.test.testdemo.service.IUserService;
 
 /**
- * Controller
+ * Controller 用户管理
  *
  * @author tq
  * @date 2023-09-20
@@ -30,39 +25,44 @@ public class UserController {
      * 查询列表
      */
     @GetMapping("/list")
-    public List<User> list(User user) {
-        List<User> list = userService.selectUserList(user);
-        return list;
+    public ResultUtils list(@RequestParam(value = "pageNum", required = false) Integer pageNum,
+                            @RequestParam(value = "pageSize", required = false) Integer pageSize, User user) {
+        Map<String, Object> list = userService.selectUserList(pageNum, pageSize, user);
+        return new ResultUtils(20000, "查询成功", list);
     }
 
     /**
      * 新增
      */
-     /*
-    @Log(title = "", businessType = BusinessType.INSERT)
+//    @Log(title = "", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody User user)
-    {
-        return toAjax(userService.insertUser(user));
+    public ResultUtils add(@RequestBody User user) {
+        return new ResultUtils(20000, "新增成功", userService.insertUser(user));
     }
 
-    *//**
+    /**
+     * 获取用户详细信息
+     */
+    @GetMapping(value = "/{id}")
+    public ResultUtils getInfo(@PathVariable("id") Long id) {
+        return new ResultUtils(20000, "获取信息成功", userService.selectUserById(id));
+    }
+
+    /**
      * 修改
-     *//*
-    @Log(title = "", businessType = BusinessType.UPDATE)
+     */
+//    @Log(title = "", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody User user)
-    {
-        return toAjax(userService.updateUser(user));
+    public ResultUtils edit(@RequestBody User user) {
+        return new ResultUtils(20000, "修改成功", userService.updateUser(user));
     }
 
-    *//**
+    /**
      * 删除
-     *//*
-    @Log(title = "", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
-        return toAjax(userService.deleteUserByIds(ids));
-    }*/
+     */
+//    @Log(title = "", businessType = BusinessType.DELETE)
+    @DeleteMapping("/{ids}")
+    public ResultUtils remove(@PathVariable Long[] ids) {
+        return new ResultUtils(20000, "删除成功", userService.deleteUserByIds(ids));
+    }
 }
