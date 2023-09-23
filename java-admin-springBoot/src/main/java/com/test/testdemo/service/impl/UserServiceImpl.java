@@ -56,6 +56,11 @@ public class UserServiceImpl implements IUserService {
     public int insertUser(User user) {
         //调用MD5工具类进行加密
         user.setPassword(MD5Utils.inputPassToFormPass(user.getPassword()));
+        // 判断系统中是否存在相同的用户名
+        User userName = userMapper.selectUserListByUserName(user.getUserName());
+        if (userName != null) {
+            return -1;
+        }
         return userMapper.insertUser(user);
     }
 

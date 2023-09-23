@@ -30,11 +30,21 @@ public class LoginController {
     @Autowired
     RedisUtils redisUtils;
 
+    /**
+     * 用户登录
+     * @param loginDTO 用户账号密码
+     * @return
+     */
     @PostMapping("login")
     public ResultUtils login(@RequestBody LoginDTO loginDTO) {
         return loginService.login(loginDTO);
     }
 
+    /**
+     * 获取用户信息
+     * @param token
+     * @return
+     */
     @GetMapping("info")
     public ResultUtils getInfo(@RequestParam String token) {
         ResultUtils resultUtils = new ResultUtils();

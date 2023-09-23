@@ -116,7 +116,7 @@
       @current-change="getList"
       @size-change="getList"
       >
-    </el-pagination>  
+    </el-pagination>
     <!-- 添加或修改对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
@@ -271,9 +271,15 @@ export default {
             });
           } else {
             addUser(this.form).then(response => {
-              this.$message.success("新增成功");
-              this.open = false;
-              this.getList();
+              if (response.data === -1){
+                this.$message.error("用户已存在");
+                this.open = false;
+                this.getList();
+              } else {
+                this.$message.success("新增成功");
+                this.open = false;
+                this.getList();
+              }
             });
           }
         }
