@@ -62,7 +62,7 @@ public class LoginServiceImpl implements ILoginService {
             redisUtils.setCacheObject("token", token);
             String x_token = redisUtils.getCacheObject("token");
             log.info("用户token是{}", x_token);
-            redisUtils.expire("token", 3 * 60);
+            redisUtils.expire("token", 2 * 60);
             return new ResultUtils(20000, "登录成功", loginVO);
         }
         return new ResultUtils(401, "登录失败", "");

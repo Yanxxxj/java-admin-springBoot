@@ -2,6 +2,8 @@ package com.test.testdemo.service;
 
 import java.util.Map;
 
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.test.testdemo.entity.User;
 
 /**
@@ -50,4 +52,9 @@ public interface IUserService {
      * @return 结果
      */
     public int deleteUserByIds(Long[] ids);
+
+    /**
+     * 查询用户地区分布
+     */
+    JSONArray selectUserByRegion();
 }

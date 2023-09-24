@@ -50,3 +50,10 @@ export function delUser(id) {
     method: 'delete'
   })
 }
+
+export function getRegion() {
+  return request({
+    url: '/test/user/region',
+    method: 'get'
+  })
+}

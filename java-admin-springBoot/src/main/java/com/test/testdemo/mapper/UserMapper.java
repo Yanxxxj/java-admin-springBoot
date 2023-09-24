@@ -1,7 +1,9 @@
 package com.test.testdemo.mapper;
 
 import java.util.List;
+import java.util.Map;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.test.testdemo.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -62,4 +64,9 @@ public interface UserMapper {
      * @return 用户信息
      */
     User selectUserListByUserName(String userName);
+
+    /**
+     * 查询用户地区分布
+     */
+    List<User> selectUserByRegion();
 }

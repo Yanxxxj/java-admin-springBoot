@@ -14,6 +14,9 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+// 引入echarts组件
+import * as echarts from 'echarts';
+import Astrict from '@/utils/astrict'
 
 /**
  * If you don't want to use mock-server
@@ -34,7 +37,7 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
-
+Vue.use(Astrict)
 new Vue({
   el: '#app',
   router,

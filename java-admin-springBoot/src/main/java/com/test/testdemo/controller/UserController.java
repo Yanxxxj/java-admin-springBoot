@@ -34,7 +34,6 @@ public class UserController {
     /**
      * 新增
      */
-//    @Log(title = "", businessType = BusinessType.INSERT)
     @PostMapping
     public ResultUtils add(@RequestBody User user) {
         return new ResultUtils(20000, "新增成功", userService.insertUser(user));
@@ -51,7 +50,6 @@ public class UserController {
     /**
      * 修改
      */
-//    @Log(title = "", businessType = BusinessType.UPDATE)
     @PutMapping
     public ResultUtils edit(@RequestBody User user) {
         return new ResultUtils(20000, "修改成功", userService.updateUser(user));
@@ -60,9 +58,16 @@ public class UserController {
     /**
      * 删除
      */
-//    @Log(title = "", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public ResultUtils remove(@PathVariable Long[] ids) {
         return new ResultUtils(20000, "删除成功", userService.deleteUserByIds(ids));
+    }
+
+    /**
+     * 查询用户地区分布
+     */
+    @GetMapping("/region")
+    public ResultUtils region() {
+        return new ResultUtils(20000, "查询成功", userService.selectUserByRegion());
     }
 }

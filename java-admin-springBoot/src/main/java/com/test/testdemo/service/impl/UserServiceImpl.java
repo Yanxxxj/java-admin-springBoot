@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.test.testdemo.utils.MD5Utils;
@@ -96,5 +98,21 @@ public class UserServiceImpl implements IUserService {
     @Override
     public int deleteUserByIds(Long[] ids) {
         return userMapper.deleteUserByIds(ids);
+    }
+
+    /**
+     * 查询用户地区分布
+     */
+    @Override
+    public JSONArray selectUserByRegion() {
+        List<User> userList = userMapper.selectUserByRegion();
+        return userList.stream()
+                .map(item -> {
+                    JSONObject object = new JSONObject();
+                    object.put("region", item.getAddress());
+                    object.put("count", item.getId());
+                    return object;
+                })
+                .collect(JSONArray::new, JSONArray::add, JSONArray::addAll);
     }
 }

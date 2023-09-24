@@ -79,4 +79,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectUserVo"/>
         where user_name = #{username}
     </select>
+
+    <select id="selectUserByRegion" resultMap="UserResult">
+        SELECT address,COUNT(1) AS id FROM `user` GROUP BY address
+    </select>
 </mapper>
